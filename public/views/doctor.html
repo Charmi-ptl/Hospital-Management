@@ -1,0 +1,39 @@
+<h2>👨‍⚕️ Doctors</h2>
+
+<form ng-submit="addDoctor()">
+  <input type="text" ng-model="newDoctor.name" placeholder="Name" required />
+  <input type="text" ng-model="newDoctor.specialty" placeholder="Specialty" required />
+  <button type="submit">Add Doctor</button>
+</form>
+
+<!-- 🔍 Search input -->
+<input type="text" ng-model="searchDoctor" placeholder="🔍 Search by name or specialty" />
+
+<hr />
+
+<h3>List of Doctors</h3>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Actions</th>
+  </tr>
+  <tr ng-repeat="doc in doctors | filter:customDoctorFilter">
+    <td>{{ doc.name }}</td>
+    <td>{{ doc.specialty }}</td>
+    <td>
+      <button ng-click="editDoctor(doc)">Edit</button>
+      <button ng-click="deleteDoctor(doc._id)">Delete</button>
+    </td>
+  </tr>
+</table>
+
+<div ng-if="editingDoctor">
+  <h3>Edit Doctor</h3>
+  <form ng-submit="updateDoctor()">
+    <input type="text" ng-model="editingDoctor.name" required />
+    <input type="text" ng-model="editingDoctor.specialty" required />
+    <button type="submit">Update</button>
+    <button type="button" ng-click="editingDoctor = null">Cancel</button>
+  </form>
+</div>

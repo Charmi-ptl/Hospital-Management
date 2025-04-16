@@ -1,0 +1,36 @@
+<h2>📅 Appointments</h2>
+
+<form ng-submit="addAppointment()">
+  <label>Doctor:</label>
+  <select ng-model="newAppointment.doctor" required>
+    <option ng-repeat="doc in doctors" value="{{doc._id}}">{{ doc.name }}</option>
+  </select>
+
+  <label>Patient:</label>
+  <select ng-model="newAppointment.patient" required>
+    <option ng-repeat="pat in patients" value="{{pat._id}}">{{ pat.name }}</option>
+  </select>
+
+  <label>Date & Time:</label>
+  <input type="datetime-local" ng-model="newAppointment.date" required />
+
+  <button type="submit">Book Appointment</button>
+</form>
+
+<hr />
+
+<h3>Upcoming Appointments</h3>
+<table border="1">
+  <tr>
+    <th>Doctor</th>
+    <th>Patient</th>
+    <th>Date</th>
+    <th>Actions</th>
+  </tr>
+  <tr ng-repeat="app in appointments">
+    <td>{{ app.doctor.name }}</td>
+    <td>{{ app.patient.name }}</td>
+    <td>{{ app.date | date:'medium' }}</td>
+    <td><button ng-click="deleteAppointment(app._id)">Cancel</button></td>
+  </tr>
+</table>
